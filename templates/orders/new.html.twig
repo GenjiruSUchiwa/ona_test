@@ -1,0 +1,74 @@
+{% extends 'homebase.html.twig' %}
+{#{% block title %}{{data[0].title}}{% endblock %}#}
+{#{% block keywords%}{{ data[0].keywords }}{% endblock %}#}
+{#{% block description%}{{ data[0].description }}{% endblock %}#}
+{% block body %}
+
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Checkout</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="single-product.html">Checkout</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap">
+        <div class="container">
+            <div class="billing_details">
+                <div class="row">
+                    <form class="row contact_form" action="{{ path('orders_new') }}" method="post" novalidate="novalidate" name="order">
+                        <div class="col-lg-8">
+                            <h3>Billing Details</h3>
+
+                            <input type="hidden" name="token" value="{{ csrf_token('form-order') }}" />
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" name="orders[name]" placeholder="Full Name" value="{{ app.user.name }}" class="form-control" id="first">
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input name="orders[phone]" value="{{ app.user.phone }}" placeholder="Phone Number" class="form-control" id="number">
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" placeholder="Address" id="add1" name="orders[address]" value="{{ app.user.address }}">
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" placeholder="Tow/City" id="city" name="orders[city]" value="{{ app.user.city }}">
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="order_box">
+                                <h2>Your Order</h2>
+                                <ul class="list">
+                                    {% set total = 0 %}
+
+                                    <li><a href="#">Product <span>Total</span></a></li>
+
+                                    {% for item in order %}
+                                        <li><a href="#">{{ item.title }} <span class="middle">x {{ item.quantity }}</span> <span class="last">{{ item.quantity * item.price }}</span></a></li>
+                                        {% set total = total + (item.quantity * item.price) %}
+                                    {% endfor %}
+                                </ul>
+                                <ul class="list list_2">
+                                    <li><a href="#">Subtotal <span>{{ total }}</span></a></li>
+                                </ul>
+                                <button type="submit" style="border:none" class="primary-btn" href="#">Proceed to checkout</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Checkout Area =================-->
+
+{% endblock %}

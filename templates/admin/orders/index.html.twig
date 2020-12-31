@@ -1,0 +1,101 @@
+{% extends 'adminbase.html.twig' %}
+{% block title %}Orders
+{% endblock %}
+{% block body %}
+    <div class="app-container">
+        <!-- begin app-nabar -->
+
+        <!-- end app-navbar -->
+        <!-- begin app-main -->
+        <div
+                class="app-main" id="main"> <!-- begin container-fluid -->
+            <div
+                    class="container-fluid">
+                <!-- begin row -->
+                <div class="row">
+                    <div
+                            class="col-md-12 m-b-30">
+                        <!-- begin page title -->
+                        <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                            <div class="page-title mb-2 mb-sm-0">
+                                <h1>Orders List</h1>
+
+                            </div>
+                            <div class="ml-auto d-flex align-items-center">
+                                <nav>
+                                    <ol class="breadcrumb p-0 m-b-0">
+                                        <li class="breadcrumb-item">
+                                            <a href="/admin/">
+                                                <i class="ti ti-home"></i>
+                                            </a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            Index
+                                        </li>
+                                        <li class="breadcrumb-item active text-primary" aria-current="page">Orderler</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                    </div>
+
+                </div>
+                <!-- end row -->
+
+                <!--start contact contant-->
+
+                <div class="row">
+
+
+                    <table class="table table-light mb-0">
+                        <thead>
+                        <tr>
+
+                            <th>Id</th>
+                            <th>Userid</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Phone</th>
+                            <th>Shipinfo</th>
+                            <th>Note</th>
+                            <th>Status</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.userid }}</td>
+                                <td>{{ order.name }}</td>
+                                <td>{{ order.amount }}</td>
+                                <td>{{ order.address }}</td>
+                                <td>{{ order.city }}</td>
+                                <td>{{ order.phone }}</td>
+                                <td>{{ order.shipinfo }}</td>
+                                <td>{{ order.status }}</td>
+                                <td>{{ order.note }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('admin_orders_show', {'id': order.id}) }}">show</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="19">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--end contact contant-->
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end app-main -->
+    </div>
+{% endblock %}

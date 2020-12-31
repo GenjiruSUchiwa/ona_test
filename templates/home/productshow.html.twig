@@ -1,0 +1,72 @@
+{% extends 'homebase.html.twig' %}
+{#{% block title %}{{data[0].title}}{% endblock %}#}
+{#{% block keywords%}{{ data[0].keywords }}{% endblock %}#}
+{#{% block description%}{{ data[0].description }}{% endblock %}#}
+{% block body %}
+
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Product Details Page</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="single-product.html">product-details</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Single Product Area =================-->
+    <div class="product_image_area mb-5">
+        <div class="container">
+            <div class="row s_product_inner">
+                <div class="col-lg-6">
+                    <div class="s_Product_carousel">
+                        <div class="single-prd-item">
+                            <img style="width: 60%" class="img" src="{{ asset('uploads/images/' ~ product.image) }}" alt="">
+                        </div>
+                        <div class="single-prd-item">
+                            <img style="width: 60%" class="img" src="{{ asset('uploads/images/' ~ product.image) }}" alt="">
+                        </div>
+                        <div class="single-prd-item">
+                            <img style="width: 60%" class="img" src="{{ asset('uploads/images/' ~ product.image) }}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="s_product_text">
+                        <h3>{{ product.title }}</h3>
+                        <h2>{{ product.price }} FCFA</h2>
+                        <ul class="list">
+                            <li><a class="active" href="#"><span>Category</span> : Household</a></li>
+                            <li><a href="#"><span>Availibility</span> : In Stock</a></li>
+                        </ul>
+                        <p>{{  product.description }}</p>
+                        <form name="shopcart" class="form-horizontal qtyFrm" action="{{ path('shopcart_new') }}" method="post">
+                        <div class="product_count">
+                            <label for="qty">Quantity:</label>
+                            <input type="text" name="shopcart[Q]" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                            <input type="hidden" name="shopcart[ID]" value="{{ product.id }}">
+                            <input type="hidden" name="token" value="{{ csrf_token('add-item') }}">
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                    class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                    class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                        </div>
+                        <div class="card_area d-flex align-items-center">
+                            <button type="submit" class="primary-btn" href="#">Add to Cart</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Single Product Area =================-->
+{% endblock %}

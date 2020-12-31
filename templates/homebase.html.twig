@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+    <!-- Mobile Specific Meta -->
+
+    <!-- Meta Description -->
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% include('home/head.html.twig') %}{% endblock %}
+
+
+</head>
+
+<body>
+
+<!-- Start Header Area -->
+{% block header %}{% include('home/header.html.twig') %}{% endblock %}
+
+<!-- End Header Area -->
+
+{% block body %}{% endblock %}
+
+<!-- start footer Area -->
+{% block footer %}{% include('home/footer.html.twig') %}{% endblock %}
+
+<!-- End footer Area -->
+{% block javascripts %}{% include('home/javascript.html.twig') %}{% endblock %}
+
+</body>
+
+</html>
